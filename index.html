@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nakka Mohan Teja — Research Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F7F5F0; --paper-dim: #EFEBE2; --card: #FFFFFF;
+    --ink: #1B1B18; --ink-soft: #55524A;
+    --indigo: #2E3A59; --brick: #8C4A3C; --rule: #D9D3C4;
+  }
+  html[data-theme="dark"]{
+    --paper: #17181A; --paper-dim: #1F2023; --card: #202225;
+    --ink: #EDEAE2; --ink-soft: #A7A297;
+    --indigo: #8FA6D9; --brick: #D98D77; --rule: #34363A;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0; background: var(--paper); color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif; font-size: 17px; line-height: 1.6;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mono{ font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  a{ color: var(--indigo); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover{ color: var(--brick); }
+  button{ font-family: inherit; }
+  .shell{ max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* ===== Top nav ===== */
+  header.topnav{
+    position: sticky; top: 0; z-index: 40;
+    background: var(--paper); border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner{ display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 20px; }
+  .brand{ display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.05rem; flex-shrink: 0; }
+  .brand-avatar{
+    width: 34px; height: 34px; border-radius: 50%; background: var(--indigo); color: var(--paper);
+    display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-size: 0.8rem;
+  }
+  .nav-links{ display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .nav-links button{
+    all: unset; cursor: pointer; font-family: "IBM Plex Mono", monospace; font-size: 0.82rem;
+    color: var(--ink-soft); padding: 8px 12px; border-radius: 3px; transition: color 0.15s, background 0.15s;
+  }
+  .nav-links button:hover{ color: var(--ink); background: var(--paper-dim); }
+  .nav-links button.active{ color: var(--brick); }
+
+  .nav-dropdown{ position: relative; }
+  .nav-dropdown-menu{
+    display: none; position: absolute; top: 100%; left: 0; margin-top: 4px;
+    background: var(--card); border: 1px solid var(--rule); border-radius: 5px; padding: 6px;
+    min-width: 190px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); z-index: 50;
+  }
+  .nav-dropdown.open .nav-dropdown-menu{ display: block; }
+  .nav-dropdown-menu button{ display: block; width: 100%; text-align: left; padding: 8px 10px; border-radius: 3px; }
+
+  .nav-icons{ display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .icon-btn{
+    all: unset; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft); border-radius: 50%; transition: background 0.15s, color 0.15s;
+  }
+  .icon-btn:hover{ background: var(--paper-dim); color: var(--ink); }
+  .icon-btn svg{ width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+  .mobile-nav-toggle{ display: none; }
+
+  /* ===== Hero ===== */
+  .hero{ padding: 64px 0 40px; border-bottom: 1px solid var(--rule); }
+  .hero h1{ font-size: 2.6rem; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .hero .subtitle{ font-size: 1.15rem; color: var(--ink-soft); margin: 0 0 18px; max-width: 60ch; }
+  .hero .tagline{ color: var(--ink-soft); max-width: 68ch; margin: 0 0 22px; }
+  .hero-meta{ display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--ink-soft); }
+  .hero-btns{ margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "IBM Plex Mono", monospace; font-size: 0.8rem;
+    padding: 10px 16px; border-radius: 4px; border: 1px solid var(--indigo);
+    color: var(--indigo); background: transparent; cursor: pointer; text-decoration: none;
+    transition: all 0.15s;
+  }
+  .btn:hover{ background: var(--indigo); color: var(--paper); }
+  .btn.secondary{ border-color: var(--rule); color: var(--ink-soft); }
+  .btn.secondary:hover{ background: var(--ink-soft); color: var(--paper); border-color: var(--ink-soft); }
+  .btn.locked{ border-color: var(--brick); color: var(--brick); }
+  .btn.locked:hover{ background: var(--brick); color: var(--paper); }
+
+  /* ===== Sections ===== */
+  .page{ display: none; padding: 44px 0 70px; }
+  .page.active{ display: block; animation: rise 0.35s ease; }
+  @keyframes rise{ from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform: translateY(0);} }
+  .page h2.section-title{ font-size: 1rem; font-weight: 500; font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); margin: 0 0 24px; }
+
+  /* ===== Filter pills ===== */
+  .pills{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+  .pill{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.74rem; color: var(--ink-soft);
+    background: var(--paper-dim); border: 1px solid var(--rule); padding: 6px 13px; border-radius: 20px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pill:hover{ border-color: var(--indigo); color: var(--indigo); }
+  .pill.active{ background: var(--indigo); border-color: var(--indigo); color: var(--paper); }
+
+  /* ===== Card grid ===== */
+  .grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+  .card{
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+    display: flex; flex-direction: column; transition: transform 0.15s, box-shadow 0.15s; cursor: pointer;
+  }
+  .card:hover{ transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+  .card-thumb{
+    height: 108px; background: linear-gradient(135deg, var(--indigo), var(--brick));
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .card-thumb svg{ width: 34px; height: 34px; stroke: var(--paper); fill: none; stroke-width: 1.6; opacity: 0.9; }
+  .card-body{ padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-tags{ display: flex; gap: 6px; flex-wrap: wrap; }
+  .card-tags span{ font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; color: var(--indigo); background: var(--paper-dim); padding: 2px 8px; border-radius: 10px; }
+  .card-tags span.status-locked{ color: var(--brick); }
+  .card-title{ font-size: 1.03rem; font-weight: 600; margin: 2px 0 0; line-height: 1.35; }
+  .card-desc{ color: var(--ink-soft); font-size: 0.9rem; margin: 0; flex: 1; }
+  .card-meta{ font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--ink-soft); display: flex; justify-content: space-between; margin-top: 4px; }
+
+  /* ===== Card detail (expanded overlay) ===== */
+  .card-overlay{
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 60;
+    align-items: flex-start; justify-content: center; padding: 60px 20px; overflow-y: auto;
+  }
+  .card-overlay.open{ display: flex; }
+  .card-detail-panel{
+    background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 32px;
+    max-width: 620px; width: 100%;
+  }
+  .card-detail-panel h3{ margin: 0 0 10px; font-size: 1.35rem; }
+  .card-detail-panel .tags{ margin-bottom: 14px; }
+  .card-detail-panel p{ color: var(--ink-soft); margin: 10px 0; }
+  .card-detail-panel .methods{ font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--ink-soft); }
+  .card-detail-panel .btn-row{ margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .close-x{ all: unset; cursor: pointer; float: right; color: var(--ink-soft); font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; }
+
+  /* ===== Simple content sections (About / Experience / Contact) ===== */
+  .simple-block{ max-width: 68ch; margin-bottom: 34px; }
+  .simple-block p{ color: var(--ink); }
+  .role-item{ display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid var(--rule); }
+  .role-item:first-child{ border-top: none; padding-top: 0; }
+  .role-item .when{ font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; color: var(--ink-soft); padding-top: 3px; }
+  .role-item h3{ margin: 0 0 4px; font-size: 1.02rem; font-weight: 600; }
+  .role-item .org{ color: var(--indigo); font-size: 0.92rem; margin-bottom: 6px; }
+  .role-item p{ margin: 6px 0; color: var(--ink-soft); }
+  @media (max-width: 640px){ .role-item{ grid-template-columns: 1fr; gap: 4px; } }
+
+  .cred-list{ margin: 0; padding: 0; list-style: none; max-width: 68ch; }
+  .cred-list li{ display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .cred-list li:first-child{ border-top: none; padding-top: 0; }
+  .cred-sub{ font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--ink-soft); display: block; }
+
+  .code-block{
+    background: var(--ink); color: #E8E4D8; font-family: "IBM Plex Mono", monospace; font-size: 0.8rem;
+    padding: 18px 20px; border-radius: 6px; overflow-x: auto; line-height: 1.55; margin: 14px 0 22px; max-width: 68ch;
+  }
+  html[data-theme="dark"] .code-block{ background: #0D0E10; }
+  .code-block .c{ color: #8C9C8C; }
+
+  .contact-grid{ display: grid; grid-template-columns: 140px 1fr; gap: 10px 16px; max-width: 480px; margin-bottom: 30px; }
+  .contact-grid dt{ font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--ink-soft); }
+  .contact-grid dd{ margin: 0; }
+  .contact-form{ max-width: 480px; }
+  .contact-form label{ display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; color: var(--ink-soft); margin: 14px 0 6px; }
+  .contact-form input, .contact-form textarea{
+    width: 100%; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--paper); font-family: inherit; font-size: 0.92rem; color: var(--ink);
+  }
+  .contact-form textarea{ min-height: 90px; resize: vertical; }
+
+  /* ===== Footer ===== */
+  footer.site-footer{
+    border-top: 1px solid var(--rule); padding: 30px 0; margin-top: 20px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+  }
+  footer.site-footer .copy{ font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; color: var(--ink-soft); }
+  footer.site-footer .foot-icons{ display: flex; gap: 6px; }
+
+  @media (max-width: 760px){
+    .nav-links{ display: none; }
+    .mobile-nav-toggle{ display: flex; }
+    .nav-links.mobile-open{
+      display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--paper); border-bottom: 1px solid var(--rule); padding: 8px; align-items: stretch;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="shell nav-inner">
+    <div class="brand">
+      <div class="brand-avatar">NM</div>
+      <span>Nakka Mohan Teja</span>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <button data-page="home" class="active">Home</button>
+      <div class="nav-dropdown" id="researchDropdown">
+        <button id="researchDropdownBtn">Research ▾</button>
+        <div class="nav-dropdown-menu">
+          <button data-page="papers">Research Papers</button>
+          <button data-page="designs">Research Designs</button>
+          <button data-page="data">Data</button>
+          <button data-page="results">Results</button>
+          <button data-page="stata">Stata &amp; Code</button>
+        </div>
+      </div>
+      <button data-page="publications">Publications</button>
+      <button data-page="about">About / Experience</button>
+      <button data-page="certificates">Certificates</button>
+      <button data-page="contact">Contact</button>
+    </nav>
+
+    <div class="nav-icons">
+      <a class="icon-btn" href="mailto:nmohanteja8@gmail.com" title="Email" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 5l8 7 8-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="4.5" r="1.8"/><path d="M11 21v-7c0-2 1.3-3.5 3.3-3.5S17 12 17 14v7"/><path d="M11 9v3"/></svg>
+      </a>
+      <button class="icon-btn" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" id="themeIcon"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <h1>Nakka Mohan Teja</h1>
+      <p class="subtitle">Applied economist and independent researcher — labour markets, energy transition, and informality in India.</p>
+      <p class="tagline">Formerly Pre-Doctoral Fellow at IIT Patna under Prof. Nalin Bharti (DPIIT IPR Chair), and Project Associate at IIT Madras under the NPTEL Post Baccalaureate Fellowship, through July 2026. Currently continuing this research independently.</p>
+      <div class="hero-meta">
+        <span>Hyderabad, India</span>
+        <span>nmohanteja8@gmail.com</span>
+        <span>M.Sc. Economics, CUAP — UGC-NET qualified</span>
+      </div>
+      <div class="hero-btns">
+        <a class="btn" href="resume.pdf" download>↓ Download Resume</a>
+        <button class="btn secondary" data-page-link="papers">View Research Papers</button>
+      </div>
+    </div>
+
+    <div style="padding-top: 40px;">
+      <h2 class="section-title">Recent Research Papers</h2>
+      <div class="pills">
+        <button class="pill active" data-filter="all" data-scope="home">All</button>
+        <button class="pill" data-filter="working" data-scope="home">Working paper</button>
+        <button class="pill" data-filter="review" data-scope="home">Under review</button>
+        <button class="pill" data-filter="progress" data-scope="home">In progress</button>
+      </div>
+      <div class="grid" id="homeGrid"></div>
+    </div>
+  </section>
+
+  <!-- RESEARCH PAPERS -->
+  <section class="page" id="page-papers">
+    <h2 class="section-title">Research Papers</h2>
+    <p class="simple-block" style="color:var(--ink-soft);">Titles, abstracts, and findings are public. Full manuscripts are access-restricted and shared on request, ahead of publication.</p>
+    <div class="pills">
+      <button class="pill active" data-filter="all" data-scope="papers">All</button>
+      <button class="pill" data-filter="working" data-scope="papers">Working paper</button>
+      <button class="pill" data-filter="review" data-scope="papers">Under review</button>
+      <button class="pill" data-filter="progress" data-scope="papers">In progress</button>
+    </div>
+    <div class="grid" id="papersGrid"></div>
+  </section>
+
+  <!-- RESEARCH DESIGNS -->
+  <section class="page" id="page-designs">
+    <h2 class="section-title">Research Designs</h2>
+    <div class="grid" id="designsGrid"></div>
+  </section>
+
+  <!-- DATA -->
+  <section class="page" id="page-data">
+    <h2 class="section-title">Data</h2>
+    <div class="grid" id="dataGrid"></div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="page" id="page-results">
+    <h2 class="section-title">Results</h2>
+    <div class="grid" id="resultsGrid"></div>
+  </section>
+
+  <!-- STATA & CODE -->
+  <section class="page" id="page-stata">
+    <h2 class="section-title">Stata &amp; Code</h2>
+    <p class="simple-block" style="color:var(--ink-soft);">Representative estimation code. Full do-files available alongside each paper's data package.</p>
+    <h3 class="mono" style="font-size:0.85rem;color:var(--ink-soft);font-weight:500;">Spatial DiD — coal-states panel</h3>
+    <div class="code-block">xtset state_id year<span class="c">
+* Callaway-Sant'Anna staggered DiD</span>
+csdid formal_emp, ivar(state_id) time(year) gvar(treat_year)
+estat event, window(-5 5) estore(cs_event)
+csdid_plot, title("Event-study: Formal Employment")</div>
+    <h3 class="mono" style="font-size:0.85rem;color:var(--ink-soft);font-weight:500;">DCC-GARCH — EPU &amp; stock-bond correlation</h3>
+    <div class="code-block"><span class="c">// EViews / Stata mgarch dcc</span>
+mgarch dcc(generalized), arch(1) garch(1): stock_ret bond_ret
+predict dcc_corr, correlation
+tsline dcc_corr epu_index, yaxis(1) y2axis(2)</div>
+    <div class="hero-btns">
+      <a class="btn secondary" href="code/spatial-did-coal.do" download>↓ spatial-did-coal.do</a>
+      <a class="btn secondary" href="code/dcc-garch-epu.do" download>↓ dcc-garch-epu.do</a>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section class="page" id="page-publications">
+    <h2 class="section-title">Publications &amp; Conference Presentations</h2>
+    <div class="grid" id="pubsGrid"></div>
+  </section>
+
+  <!-- ABOUT / EXPERIENCE -->
+  <section class="page" id="page-about">
+    <h2 class="section-title">About</h2>
+    <div class="simple-block">
+      <p>I'm an applied economist working at the intersection of development economics and labour markets. I completed a year as a Pre-Doctoral Research Fellow under Prof. Nalin Bharti (DPIIT IPR Chair) at IIT Patna, and a subsequent term as Project Associate at IIT Madras under the NPTEL Post Baccalaureate Fellowship, through July 2026. I'm currently continuing this research independently, extending the empirical work developed during those fellowships. My core work uses causal identification methods on Indian state-panel and survey data — spatial Difference-in-Differences and Synthetic Control show that renewable-energy investment in India's coal-dependent states raised formal employment by 4.2–6.8 percentage points over five years, while coal phase-down regions saw real wages fall 7.3–9.1 points with limited recovery. A related paper on Jharkhand's resource-curse dynamics, using System GMM with geological coal reserves as an instrument, finds that education amplifies rather than offsets the resource curse — a talent-misallocation result consistent with Murphy, Shleifer &amp; Vishny's rent-seeking framework. I hold an M.Sc. in Economics from Central University of Andhra Pradesh (CGPA 8.89/10, First Class with Distinction) and am UGC-NET qualified. My toolkit is STATA, EViews, and SPSS, applied to staggered DiD, Synthetic Control, GMM, and DCC-GARCH estimation.</p>
+    </div>
+    <h2 class="section-title">Research Interests</h2>
+    <div class="card-tags" style="margin-bottom:34px;">
+      <span>Labour Economics</span><span>Development Theory</span><span>Indian Economic History</span><span>Energy Transition</span><span>Informality &amp; Measurement</span>
+    </div>
+    <h2 class="section-title">Experience</h2>
+    <div class="simple-block" style="max-width: 68ch;">
+      <div class="role-item">
+        <div class="when">Jul 2025 – Jul 2026</div>
+        <div>
+          <h3>Pre-Doctoral Research Fellow</h3>
+          <div class="org">IIT Patna, under Prof. Nalin Bharti — NPTEL Post Baccalaureate Fellowship</div>
+          <p>Applied economics research spanning econometric modelling, data curation, and policy-relevant research output.</p>
+        </div>
+      </div>
+      <div class="role-item">
+        <div class="when">Dec 2023 – Feb 2024</div>
+        <div>
+          <h3>Research Intern</h3>
+          <div class="org">Rural Development Trust (RDT), Anantapuramu, Andhra Pradesh</div>
+          <p>Field-based socioeconomic research on rural livelihoods and development interventions.</p>
+          <div><a href="https://mohanteja7m.github.io/Rural-Development-Trust-Internship.com/RDT.html">Internship report ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section class="page" id="page-certificates">
+    <h2 class="section-title">Certificates</h2>
+    <ul class="cred-list">
+      <li><div><span>M.Sc. Economics — Central University of Andhra Pradesh</span><span class="cred-sub">2022–2024 · CGPA 8.89/10</span></div><a class="btn secondary" href="certificates/msc-degree.pdf" download>↓</a></li>
+      <li><div><span>UGC-NET, Economics</span><span class="cred-sub">Dec 2024</span></div><a class="btn secondary" href="certificates/ugc-net.pdf" download>↓</a></li>
+      <li><div><span>Diploma in AI &amp; Machine Learning — University of Hyderabad</span><span class="cred-sub">2021–2022</span></div><a class="btn secondary" href="certificates/ai-ml-diploma.pdf" download>↓</a></li>
+      <li><div><span>B.Sc. (Honours) — Sri Sathya Sai Institute of Higher Learning</span><span class="cred-sub">2017–2020</span></div><a class="btn secondary" href="certificates/bsc-honours.pdf" download>↓</a></li>
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="page" id="page-contact">
+    <h2 class="section-title">Contact</h2>
+    <dl class="contact-grid">
+      <dt>Email</dt><dd><a href="mailto:nmohanteja8@gmail.com">nmohanteja8@gmail.com</a></dd>
+      <dt>Location</dt><dd>Hyderabad, India</dd>
+    </dl>
+    <form class="contact-form" id="contactForm">
+      <label for="cf-name">Name</label><input id="cf-name" type="text" required>
+      <label for="cf-email">Your email</label><input id="cf-email" type="email" required>
+      <label for="cf-msg">Message</label><textarea id="cf-msg" required></textarea>
+      <div class="hero-btns"><button type="submit" class="btn">Send</button></div>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <span class="copy">© 2026 Nakka Mohan Teja</span>
+    <div class="foot-icons">
+      <a class="icon-btn" href="mailto:nmohanteja8@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 5l8 7 8-7"/></svg></a>
+      <a class="icon-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="4.5" r="1.8"/><path d="M11 21v-7c0-2 1.3-3.5 3.3-3.5S17 12 17 14v7"/><path d="M11 9v3"/></svg></a>
+    </div>
+  </footer>
+</div>
+
+<!-- Card detail overlay -->
+<div class="card-overlay" id="cardOverlay">
+  <div class="card-detail-panel">
+    <button class="close-x" id="overlayClose">✕ close</button>
+    <div id="overlayContent"></div>
+  </div>
+</div>
+
+<script>
+/* ===== Data: research papers ===== */
+var papers = [
+  { id:'energy', status:'working', statusLabel:'Working paper', title:"The Labor Market Dynamics of India's Energy Transition: An Econometric Evaluation of Coal-Dependent States", desc:"Causal effects of green-infrastructure investment and coal-sector contraction on wage inequality and formal employment across five coal-producing states, 2010–2023.", methods:'Spatial DiD · Synthetic Control · STATA / EViews', locked:true, meta:'with Prof. Nalin Bharti' },
+  { id:'bihar', status:'review', statusLabel:'Under peer review', title:'Out-Migration, Fiscal Constraints, and Regional Underdevelopment in Bihar', desc:'Examines the relationship between fiscal capacity, out-migration, and regional underdevelopment in Bihar.', methods:'', locked:true, meta:'Access restricted' },
+  { id:'epu', status:'progress', statusLabel:'In preparation', title:'Economic Policy Uncertainty and Time-Varying Stock–Bond Correlation in India', desc:'Studies how Economic Policy Uncertainty shapes the time-varying correlation between Indian stock and bond returns.', methods:'DCC-GARCH', locked:true, meta:'IFC 2026' },
+  { id:'informality', status:'progress', statusLabel:'In progress', title:'Informality in India: Methodology and Framing across the EUS–PLFS Transition', desc:"Methodological challenges of measuring informality across India's shift from EUS to PLFS, using MDII / SMDII frameworks.", methods:'', locked:true, meta:'' }
+];
+
+var pubs = [
+  { title:'Endogenous Growth Constraints under Resource Dependence: Human Development and Innovation Dynamics in Jharkhand', desc:'State-level panel (2012–13 to 2023–24) modelling how mining concentration crowds out human-capital formation and innovation, using coal reserves as an exogenous instrument.', methods:'Fixed Effects · System GMM (Blundell & Bond, 1998)', meta:'Conference paper · IHRD', file:'publications/jharkhand-ihrd.pdf' },
+  { title:'Cultural History of Colonial-Period Indentured Labour Routes', desc:'Presented at the two-day symposium under the ICSSR Longitudinal Research Project on Cultural History of Labour Migration in Colonial India, with IIT Patna.', methods:'', meta:'International Symposium, IIT Patna · May 2026', file:'' }
+];
+
+var designs = [
+  { title:'IFC 2026 — EPU & Stock–Bond Correlation', desc:'Identification strategy, data templates, and analysis scripts for the DCC-GARCH estimation.', file:'designs/ifc-2026-design.pdf' },
+  { title:'Energy Transition Labour Markets — Spatial DiD / SCM Design', desc:'Treatment/control state selection, spatial DiD specification, and Synthetic Control robustness checks.', file:'designs/energy-transition-design.pdf' }
+];
+
+var dataItems = [
+  { title:'Coal-States Panel Dataset (2010–2023)', desc:'State-year panel — formal employment, real wages, renewable/coal investment flows across five states.', file:'data/coal-states-panel.csv' },
+  { title:'EUS–PLFS Harmonised Extract', desc:'Harmonised extract for the informality-measurement paper, built for tiered validation across the survey transition.', file:'data/eus-plfs-extract.csv' }
+];
+
+var results = [
+  { title:'Energy transition & labour markets', desc:'Renewable-investment states: +4.2 to +6.8 pp formal employment over five years. Coal phase-down states: −7.3 to −9.1 pp real wages, limited mean reversion. Effects concentrated within 150 km of project sites.' },
+  { title:'Jharkhand resource-curse paper', desc:'Negative interaction between education and mining dependence — consistent with a talent-misallocation channel. Robust to Difference GMM and alternative instruments.' }
+];
+
+var icons = {
+  paper: '<path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6M9 17h6"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  design: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+  data: '<path d="M4 5c0-1.5 3.5-2.5 8-2.5s8 1 8 2.5v14c0 1.5-3.5 2.5-8 2.5s-8-1-8-2.5z"/><path d="M4 5c0 1.5 3.5 2.5 8 2.5s8-1 8-2.5"/>',
+  result: '<path d="M4 19V9M11 19V4M18 19v-7"/>'
+};
+
+function cardHTML(p){
+  var lockClass = p.locked ? ' status-locked' : '';
+  var thumbIcon = p.locked ? icons.lock : icons.paper;
+  return '<div class="card" data-status="'+p.status+'" data-id="'+p.id+'">' +
+    '<div class="card-thumb"><svg viewBox="0 0 24 24">'+thumbIcon+'</svg></div>' +
+    '<div class="card-body">' +
+      '<div class="card-tags"><span class="'+lockClass+'">'+p.statusLabel+'</span>' + (p.methods ? '<span>'+p.methods.split(' · ')[0]+'</span>' : '') + '</div>' +
+      '<p class="card-title">'+p.title+'</p>' +
+      '<p class="card-desc">'+p.desc+'</p>' +
+      '<div class="card-meta"><span>'+(p.meta||'')+'</span><span>'+(p.locked ? '🔒 Restricted' : '')+'</span></div>' +
+    '</div></div>';
+}
+
+function renderPapers(target, filter){
+  var el = document.getElementById(target);
+  el.innerHTML = papers.filter(function(p){ return filter==='all' || p.status===filter; }).map(cardHTML).join('');
+  el.querySelectorAll('.card').forEach(function(cardEl){
+    cardEl.addEventListener('click', function(){ openPaperDetail(cardEl.getAttribute('data-id')); });
+  });
+}
+
+function openPaperDetail(id){
+  var p = papers.filter(function(x){ return x.id===id; })[0];
+  var body = '<h3>'+p.title+'</h3>' +
+    '<div class="tags card-tags"><span class="status-locked">'+p.statusLabel+'</span></div>' +
+    '<p>'+p.desc+'</p>' +
+    (p.methods ? '<p class="methods">'+p.methods+'</p>' : '') +
+    '<div class="btn-row"><button class="btn locked" id="requestBtn">🔒 Request manuscript access</button></div>';
+  document.getElementById('overlayContent').innerHTML = body;
+  document.getElementById('cardOverlay').classList.add('open');
+  document.getElementById('requestBtn').addEventListener('click', function(){
+    var subject = encodeURIComponent('Manuscript access request: ' + p.title);
+    var body2 = encodeURIComponent('Requesting access to: ' + p.title + ' (' + p.statusLabel + ')\n\nName/affiliation:\nEmail:');
+    window.location.href = 'mailto:nmohanteja8@gmail.com?subject='+subject+'&body='+body2;
+  });
+}
+
+document.getElementById('overlayClose').addEventListener('click', function(){ document.getElementById('cardOverlay').classList.remove('open'); });
+document.getElementById('cardOverlay').addEventListener('click', function(e){ if(e.target.id==='cardOverlay'){ e.currentTarget.classList.remove('open'); } });
+
+function simpleCard(item, iconKey){
+  return '<div class="card" style="cursor:default;">' +
+    '<div class="card-thumb"><svg viewBox="0 0 24 24">'+icons[iconKey]+'</svg></div>' +
+    '<div class="card-body">' +
+      '<p class="card-title">'+item.title+'</p>' +
+      '<p class="card-desc">'+item.desc+'</p>' +
+      (item.methods ? '<p class="card-meta" style="justify-content:flex-start;">'+item.methods+'</p>' : '') +
+      (item.meta ? '<p class="card-meta" style="justify-content:flex-start;">'+item.meta+'</p>' : '') +
+      (item.file ? '<div class="hero-btns"><a class="btn secondary" href="'+item.file+'" download>↓ Download</a></div>' : '') +
+    '</div></div>';
+}
+
+document.getElementById('designsGrid').innerHTML = designs.map(function(d){ return simpleCard(d,'design'); }).join('');
+document.getElementById('dataGrid').innerHTML = dataItems.map(function(d){ return simpleCard(d,'data'); }).join('');
+document.getElementById('resultsGrid').innerHTML = results.map(function(d){ return simpleCard(d,'result'); }).join('');
+document.getElementById('pubsGrid').innerHTML = pubs.map(function(d){ return simpleCard(d,'paper'); }).join('');
+
+renderPapers('papersGrid', 'all');
+renderPapers('homeGrid', 'all');
+
+document.querySelectorAll('.pill').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var scope = btn.getAttribute('data-scope');
+    document.querySelectorAll('.pill[data-scope="'+scope+'"]').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var filter = btn.getAttribute('data-filter');
+    renderPapers(scope==='home' ? 'homeGrid' : 'papersGrid', filter);
+  });
+});
+
+/* ===== Page navigation ===== */
+var navButtons = document.querySelectorAll('[data-page]');
+var pages = document.querySelectorAll('.page');
+function showPage(id){
+  pages.forEach(function(p){ p.classList.toggle('active', p.id === 'page-' + id); });
+  navButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-page') === id); });
+  window.scrollTo({ top: 0 });
+  document.getElementById('researchDropdown').classList.remove('open');
+  document.getElementById('navLinks').classList.remove('mobile-open');
+  history.replaceState(null, '', '#' + id);
+}
+navButtons.forEach(function(btn){ btn.addEventListener('click', function(){ showPage(btn.getAttribute('data-page')); }); });
+document.querySelectorAll('[data-page-link]').forEach(function(el){ el.addEventListener('click', function(){ showPage(el.getAttribute('data-page-link')); }); });
+var initial = window.location.hash.replace('#','');
+if(initial && document.getElementById('page-' + initial)){ showPage(initial); }
+
+/* ===== Dropdown ===== */
+document.getElementById('researchDropdownBtn').addEventListener('click', function(e){
+  e.stopPropagation();
+  document.getElementById('researchDropdown').classList.toggle('open');
+});
+document.addEventListener('click', function(){ document.getElementById('researchDropdown').classList.remove('open'); });
+
+/* ===== Dark mode ===== */
+var themeToggle = document.getElementById('themeToggle');
+var root = document.documentElement;
+function applyTheme(t){ root.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+themeToggle.addEventListener('click', function(){
+  applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+var saved = null;
+try{ saved = localStorage.getItem('theme'); }catch(e){}
+if(saved){ applyTheme(saved); }
+else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){ applyTheme('dark'); }
+
+/* ===== Contact form ===== */
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('cf-name').value;
+  var email = document.getElementById('cf-email').value;
+  var msg = document.getElementById('cf-msg').value;
+  var subject = encodeURIComponent('Portfolio contact from ' + name);
+  var body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+  window.location.href = 'mailto:nmohanteja8@gmail.com?subject=' + subject + '&body=' + body;
+});
+</script>
+
+</body>
+</html>
